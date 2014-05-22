@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Operational Statistics</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/smoothness/jquery-ui-1.10.3.custom.css">
+        <link rel="stylesheet" href="css/itdash.css">
+        <script src="js/libs/jqueryui-1.10.0/jquery-1.9.1.js"></script>
+        <script src="js/libs/jqueryui-1.10.0/jquery-ui-1.10.3.custom.js"></script>
+        <script src="js/itdash.js"></script>
+        <script>
+            $(function() {
+                $("#tabs").tabs();
+                $("sp_select").empty();
+            });
+        </script>
+        <script>
+            function loadStaff() {
+                $(function() {
+                   $("#staff_select").empty(); 
+                   $("#num_incidents").empty();
+                   $("#num_incidents_assigned").empty();
+                   $("#num_requests").empty();
+                   $("#num_requests_assigned").empty();
+                });
+                loadStaffMembers(document.getElementById("sp_select").options[document.getElementById("sp_select").selectedIndex].value); 
+            }
+            function jobSummary() {
+                document.getElementById("loading").style.cssText = "display: block";
+                document.getElementById("go_button").disabled = "disabled";
+                loadJobSummary(document.getElementById("sp_select").options[document.getElementById("sp_select").selectedIndex].value,
+                               document.getElementById("staff_select").options[document.getElementById("staff_select").selectedIndex].value);
+            }
+        </script>
+    </head>
+    <body onLoad="loadServiceProviders();">
+        <h1>Operational Statistics</h1>
+        <select id="sp_select" name="team_select" onChange="loadStaff();">
+            <option>Choose a Service Provider</option>
+        </select>
+        <select id="staff_select" name="staff_select">
+        </select>
+        <input class="ui-button" type="button" value="Go" id="go_button" onClick="jobSummary();">
+        <br />
+        <br />
+        <table class="table_job">
+            <tr class="incident_hdr">
+                <td class="ui-widget-header job_header" colspan="4">Incidents</td>
+            </tr>
+            <tr class="incident_hdr">
+                <td>Logged by you/team:</td><td class="job_count" id="num_incidents">&nbsp;</td>
+                <td>Assigned by you:</td><td class="job_count" id="num_incidents_assigned">&nbsp;</td>
+            </tr>
+            <tr class="job_hdr">
+                <td class="ui-widget-header job_header" colspan="4">Requests</td>
+            </tr>
+            <tr class="job_hdr">
+                <td>Logged by you/team:</td><td class="job_count" id="num_requests">&nbsp;</td>
+                <td>Assigned to you:</td><td class="job_count" id="num_requests_assigned">&nbsp;</td>
+            </tr>
+        </table>
+        <br />
+        <div id="loading" style="display:  none">Loading...</div>
+        <div id="tabs">
+            <ul>
+                <li><a id="tabs-new-hdr" href="#tabs-new"><span id="spn-new">New</span></a></li>
+                <li><a href="#tabs-in-progress"><span id="spn-ip">In Progress</span></a></li>
+                <li><a href="#tabs-monitor"><span id="spn-monitor">Monitor</span></a></li>
+                <li><a href="#tabs-customer"><span id="spn-customer">Awaiting Customer</span></a></li>
+                <li><a href="#tabs-third"><span id="spn-third">3rd Party</span></a></li>
+                <li><a href="#tabs-resolved"><span id="spn-resolved">Resolved</span></a></li>
+                <li><a href="#tabs-wtask"><span id="spn-wtask">Work Tasks</span></a></li>
+            </ul>
+            <div id="tabs-new">All new jobs to be listed here</div>
+            <div id="tabs-in-progress">All In Progress jobs listed here</div>
+            <div id="tabs-monitor">All Monitoring jobs listed here</div>
+            <div id="tabs-customer">All Awaiting Customer jobs listed here</div>
+            <div id="tabs-third">All Awaiting 3rd Party jobs listed here</div>
+            <div id="tabs-resolved">All Resolved jobs listed here</div>
+            <div id="tabs-wtask">All Work tasks listed here</div>
+        </div>
+    </body>
+</html>

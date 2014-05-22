@@ -1,0 +1,35 @@
+root { 
+    display: block;
+}
+
+h1 {
+    font-family: arial, serif;
+    font-size: 24pt;
+    font-weight: bold;
+}
+.table_job {
+    table-layout: auto;
+    border: solid black 1px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    padding: 0px;
+}
+
+tr.incident_hdr {
+    background-color: #ffffcc;
+}
+
+tr.job_hdr {
+    background-color: #ffccff;
+}
+
+td.job_header {
+    text-align: right;
+    font-weight: bold;
+}
+
+td.job_count {
+    background-color: #ccc;
+    border: dashed grey 1px;
+    width: 12px;
+}
